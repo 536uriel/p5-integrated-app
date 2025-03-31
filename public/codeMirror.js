@@ -1,14 +1,22 @@
 //for p5 canvas
 
+var body = document.body,
+    html = document.documentElement;
+
+var cwidth = Math.max(body.scrollWidth, body.offsetWidth,
+    html.clientWidth, html.scrollWidth, html.offsetWidth);
+
+var cheight = Math.max(body.scrollHeight, body.offsetHeight,
+    html.clientHeight, html.scrollHeight, html.offsetHeight);
 
 var callback = () => { };
 
 function setup() {
-    createCanvas(400, 400);
+
+    let canvas = createCanvas(500, 400);
+    canvas.parent("output-canvas");
 
 }
-
-
 
 function draw() {
     background(225);
@@ -33,8 +41,10 @@ var editor2 = CodeMirror.fromTextArea(document.getElementById("editor2"), {
 
 });
 
-editor1.setSize(500, 150);
-editor2.setSize(500, 150);
+
+
+editor1.setSize(cwidth / 2, 120);
+editor2.setSize(cwidth / 2, 200);
 
 
 
@@ -44,7 +54,18 @@ var commands = [
     "background(225)",
     "fill(0, 0, 225)",
     "circle(x, y, r)",
-    "rect(x, y, w, h)"
+    "rect(x, y, w, h)",
+    "line(x1, y1, x2, y2)",
+    "random()",
+    "keyIsPressed",
+    "key",
+    `if(){  
+    
+
+}else{ 
+
+
+}`
 ]
 
 var clist = document.getElementById("commands");
@@ -54,7 +75,7 @@ commands.forEach(command => {
 
     li.innerText = command;
 
-    li.addEventListener("click",()=>{
+    li.addEventListener("click", () => {
         editor2.setValue(editor2.getValue() + "\n" + command);
     })
 
