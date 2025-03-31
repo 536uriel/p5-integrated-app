@@ -1,5 +1,8 @@
 //for p5 canvas
+
+
 var callback = () => { };
+
 function setup() {
     createCanvas(400, 400);
 
@@ -14,13 +17,15 @@ function draw() {
 
 
 // Initialize CodeMirror
+
+//editor for the precode 
 var editor1 = CodeMirror.fromTextArea(document.getElementById("editor1"), {
     mode: "javascript",  // Syntax highlighting mode
     lineNumbers: true,   // Show line numbers
     theme: "default"
 });
 
-
+//editor for the draw function
 var editor2 = CodeMirror.fromTextArea(document.getElementById("editor2"), {
     mode: "javascript",  // Syntax highlighting mode
     lineNumbers: true,   // Show line numbers
@@ -30,6 +35,34 @@ var editor2 = CodeMirror.fromTextArea(document.getElementById("editor2"), {
 
 editor1.setSize(500, 150);
 editor2.setSize(500, 150);
+
+
+
+
+
+var commands = [
+    "background(225)",
+    "fill(0, 0, 225)",
+    "circle(x, y, r)",
+    "rect(x, y, w, h)"
+]
+
+var clist = document.getElementById("commands");
+
+commands.forEach(command => {
+    let li = document.createElement("li");
+
+    li.innerText = command;
+
+    li.addEventListener("click",()=>{
+        editor2.setValue(editor2.getValue() + "\n" + command);
+    })
+
+    clist.appendChild(li)
+});
+
+
+
 
 // Function to execute code as online console
 function runCode() {
